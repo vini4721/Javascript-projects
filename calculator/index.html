@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="src/css/style.css">
+  <link rel="stylesheet" href="src/css/normalise.css">
+  <title>Vite App</title>
+</head>
+
+<body>
+  <div class="main-container">
+
+    <form action="" class="inputs">
+      <input type="text" placeholder="Input 1" id="input1">
+      <label for="input1"></label>
+
+      <input type="text" placeholder="Input 2" id="input2">
+      <label for="input2"></label>
+    </form>
+
+    <form action="" class="options">
+      <div class="radio-wrapper">
+        <input type="radio" id="add" name="operation">
+        <label for="add">Addition</label>
+      </div>
+
+      <div class="radio-wrapper">
+        <input type="radio" id="subtract" name="operation">
+        <label for="subtract">Subtract</label>
+      </div>
+
+      <div class="radio-wrapper">
+        <input type="radio" id="multiply" name="operation">
+        <label for="multiply">Multiply</label>
+      </div>
+
+      <div class="radio-wrapper">
+        <input type="radio" id="divide" name="operation">
+        <label for="divide">Divide</label>
+      </div>
+    </form>
+
+    <div class="output"></div>
+
+    <div class="button">Calculate</div>
+  </div>
+
+  <script type="module" src="src/js/main.js"></script>
+</body>
+
+</html>
