@@ -14,31 +14,36 @@
   <div class="main-container">
 
     <form action="" class="inputs">
-      <input type="text" placeholder="Input 1" id="input1">
-      <label for="input1"></label>
+      <div class="input-group">
+        <input type="text" placeholder="Input 1" id="input1">
+        <label for="input1"></label>
+      </div>
 
-      <input type="text" placeholder="Input 2" id="input2">
-      <label for="input2"></label>
+      <div class="input-group">
+        <input type="text" placeholder="Input 2" id="input2">
+        <label for="input2"></label>
+        <img src="../calculator/src/assets/icons/plus.png">
+      </div>
     </form>
 
     <form action="" class="options">
       <div class="radio-wrapper">
-        <input type="radio" id="add" name="operation">
+        <input type="radio" value="add" name="operation">
         <label for="add">Addition</label>
       </div>
 
       <div class="radio-wrapper">
-        <input type="radio" id="subtract" name="operation">
+        <input type="radio" value="subtract" name="operation">
         <label for="subtract">Subtract</label>
       </div>
 
       <div class="radio-wrapper">
-        <input type="radio" id="multiply" name="operation">
+        <input type="radio" value="multiply" name="operation">
         <label for="multiply">Multiply</label>
       </div>
 
       <div class="radio-wrapper">
-        <input type="radio" id="divide" name="operation">
+        <input type="radio" value="divide" name="operation">
         <label for="divide">Divide</label>
       </div>
     </form>
@@ -47,6 +52,8 @@
 
     <div class="button">Calculate</div>
   </div>
+
+  <!-- <img src="../calculator/src/javascript.svg" alt=""> -->
 
   <script type="module" src="src/js/main.js"></script>
 </body>

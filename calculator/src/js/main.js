@@ -1,43 +1,98 @@
-document.querySelector(".button").addEventListener("click", function(){
+document.addEventListener("DOMContentLoaded", main);
+
+function main() {
+  const buttonElement = document.querySelector(".button");
+
+  if (buttonElement) {
+    buttonElement.addEventListener("click", selectOperator);
+  }
+}
+
+function selectOperator() {
   const selectedRadio = document.querySelector('input[name="operation"]:checked');
 
-  if(selectedRadio) {
-    const operation = selectedRadio.id;
+  if (selectedRadio) {
+    const operation = selectedRadio.value;
     performCalculation(operation);
   }
-  else{
-    console.log("No operation selected");
+  else {
+    alert("No operation selected");
   }
-});
+}
 
 function performCalculation(operation) {
-  let num1 = document.querySelector("#input1").value;
-  let num2 = document.querySelector("#input2").value;
 
-  num1 = parseInt(num1);
-  num2 = parseInt(num2);
+  let result = 0,displayOutput = "";
 
-  let result,symbol;
+  const operationType = {
+    "add": "+",
+    "subtract": "-",
+    "multiply": "*",
+    "divide": "/",
+  };
 
-  if(operation === 'add') {
-    result = num1+num2;
-    symbol = "+"
+  let num = document.querySelectorAll(".inputs input");
+  
+  for(let i = 0; i < num.length; i++) {
+
+    displayOutput += `${num[i].value}`;
+
+    if(i < num.length-1)
+      displayOutput += `${operationType[operation]}`;
+
+    if(operation === 'add') {
+      result += parseInt(num[i].value);
+    }
+  
+    else if(operation === 'subtract'){
+      result -= parseInt(num[i].value);
+    }
+  
+    else if(operation === 'divide'){
+      if(i === 0)
+        result = parseInt(num[i]);
+      else{
+        const value = parseInt(num[i]);
+        if(value !== 0)
+          result /= value;
+      }
+    }
+  
+    else{
+      if(i === 0)
+        result = 1;
+
+      result *= parseInt(num[i].value);
+    }
+
   }
-
-  else if(operation === 'subtract'){
-    result = num1-num2;
-    symbol = "-";
-  }
-
-  else if(operation === 'divide'){
-    result = num1/num2;
-    symbol = "/";
-  }
-
-  else{
-    result = num1*num2;
-    symbol = "*";
-  }
-
-  document.querySelector(".output").textContent = `${num1} ${symbol} ${num2} = ${result}`;
+  document.querySelector(".output").textContent = `${displayOutput} = ${result}`;
 }
+
+let n = 3;
+let lastInputTag = document.querySelector(".input-group img");
+lastInputTag.addEventListener("click", generateInputTag);
+
+function generateInputTag() {
+  if (lastInputTag.parentNode)
+    lastInputTag.remove();
+
+  const inputContainer = document.createElement("div");
+  inputContainer.className = "input-group";
+
+  const createdInputElement = document.createElement("input");
+  createdInputElement.setAttribute("placeholder",`input ${n}`);
+  inputContainer.appendChild(createdInputElement);
+  n++;
+
+  const plusIcon = document.createElement("img");
+  plusIcon.src = "https://cdn-icons-png.flaticon.com/512/1828/1828919.png";
+  plusIcon.className = "plus-icon";
+  inputContainer.appendChild(plusIcon);
+
+  document.querySelector(".inputs").appendChild(inputContainer);
+
+  lastInputTag = plusIcon;
+  lastInputTag.addEventListener("click", generateInputTag);
+}
+

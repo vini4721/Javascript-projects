@@ -12,19 +12,17 @@ body{
 .inputs{
   display: flex;
   flex-direction: column;
-  margin: auto;
   width: 50%;
   padding-bottom: 50px;
 }
 
-.inputs label{
-  margin-top: 20px;
+.inputs input{
+  margin-bottom: 10px;
 }
 
 .options{
   display: flex;
   flex-direction: column;
-  /* align-items: center; */
   padding: auto;
   margin-bottom: 100px;
 }
@@ -49,3 +47,14 @@ body{
   padding-bottom: 30px;
 }
 
+.input-group{
+  position: relative;
+}
+
+.input-group img{
+  height: 20px;
+  width: 20px;
+  position: absolute;
+  padding-left: 5px;
+  top: 1px;
+}
