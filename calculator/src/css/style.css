@@ -10,21 +10,32 @@ body{
 }
 
 .inputs{
+  position: relative;
   display: flex;
   flex-direction: column;
   width: 50%;
-  padding-bottom: 50px;
 }
 
 .inputs input{
   margin-bottom: 10px;
 }
 
+.inputs img{
+  height: 20px;
+  width: 20px;
+  position: absolute;
+  z-index: 1;
+  right: 1px;
+  bottom: 10px;
+}
+
+
 .options{
   display: flex;
   flex-direction: column;
   padding: auto;
-  margin-bottom: 100px;
+  margin-bottom: 20px;
+  margin-top: 20px;
 }
 
 .options label{
@@ -49,12 +60,4 @@ body{
 
 .input-group{
   position: relative;
-}
-
-.input-group img{
-  height: 20px;
-  width: 20px;
-  position: absolute;
-  padding-left: 5px;
-  top: 1px;
 }

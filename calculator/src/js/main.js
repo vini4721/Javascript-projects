@@ -21,9 +21,6 @@ function selectOperator() {
 }
 
 function performCalculation(operation) {
-
-  let result = 0,displayOutput = "";
-
   const operationType = {
     "add": "+",
     "subtract": "-",
@@ -31,68 +28,68 @@ function performCalculation(operation) {
     "divide": "/",
   };
 
-  let num = document.querySelectorAll(".inputs input");
+  let InputElements = document.querySelectorAll(".input-group input");
+  let operationOnInput = [];
+
+  //To extract values from the inputElements array
+  for(let i = 0; i < InputElements.length; i++) {
+    operationOnInput[i] = parseInt(InputElements[i].value);
+  }
   
-  for(let i = 0; i < num.length; i++) {
+  let result = 0;
+  let displayOutput = "";
 
-    displayOutput += `${num[i].value}`;
+  for (let i = 0; i < operationOnInput.length; i++) {
 
-    if(i < num.length-1)
+    displayOutput += `${operationOnInput[i]}`;
+
+    if (i < operationOnInput.length - 1)
       displayOutput += `${operationType[operation]}`;
 
-    if(operation === 'add') {
-      result += parseInt(num[i].value);
-    }
-  
-    else if(operation === 'subtract'){
-      result -= parseInt(num[i].value);
-    }
-  
-    else if(operation === 'divide'){
-      if(i === 0)
-        result = parseInt(num[i]);
-      else{
-        const value = parseInt(num[i]);
-        if(value !== 0)
-          result /= value;
-      }
-    }
-  
-    else{
-      if(i === 0)
-        result = 1;
+    switch(operation) {
+      case "add":
+        result += operationOnInput[i];
+        break
 
-      result *= parseInt(num[i].value);
-    }
+      case "subtract":
+        if(i == 0)
+          result = operationOnInput[i];
+        else
+          result -= operationOnInput[i];
+        break
 
+      case "multiply":
+        if(i == 0)
+          result = 1;
+          result *= operationOnInput[i];
+        break;
+
+      case "divide":
+
+    }
   }
   document.querySelector(".output").textContent = `${displayOutput} = ${result}`;
 }
 
 let n = 3;
-let lastInputTag = document.querySelector(".input-group img");
+let lastInputTag = document.getElementById("add-button");
 lastInputTag.addEventListener("click", generateInputTag);
 
 function generateInputTag() {
-  if (lastInputTag.parentNode)
-    lastInputTag.remove();
-
   const inputContainer = document.createElement("div");
   inputContainer.className = "input-group";
 
   const createdInputElement = document.createElement("input");
-  createdInputElement.setAttribute("placeholder",`input ${n}`);
+  createdInputElement.setAttribute("placeholder", `input ${n}`);
+  createdInputElement.setAttribute("id",`input${n}`);
+
+  const createLabel = document.createElement("label");
+  createLabel.setAttribute("for",`input${n}`);
+
   inputContainer.appendChild(createdInputElement);
+  inputContainer.appendChild(createLabel);
   n++;
 
-  const plusIcon = document.createElement("img");
-  plusIcon.src = "https://cdn-icons-png.flaticon.com/512/1828/1828919.png";
-  plusIcon.className = "plus-icon";
-  inputContainer.appendChild(plusIcon);
-
   document.querySelector(".inputs").appendChild(inputContainer);
-
-  lastInputTag = plusIcon;
-  lastInputTag.addEventListener("click", generateInputTag);
 }
 
