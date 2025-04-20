@@ -13,22 +13,31 @@ body{
   position: relative;
   display: flex;
   flex-direction: column;
-  width: 50%;
+  width: 60%;
 }
 
 .inputs input{
   margin-bottom: 10px;
 }
 
-.inputs img{
+#add-button{
+  height: 20px;
+  width: 20px;
+  position: absolute;
+  right: 1px;
+  bottom: 10px;
+  padding-right: 2rem;
+  z-index: 1;
+}
+
+#remove-button{
   height: 20px;
   width: 20px;
   position: absolute;
   z-index: 1;
-  right: 1px;
+  right: 0px;
   bottom: 10px;
 }
-
 
 .options{
   display: flex;

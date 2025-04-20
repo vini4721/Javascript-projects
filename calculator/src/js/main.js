@@ -29,67 +29,80 @@ function performCalculation(operation) {
   };
 
   let InputElements = document.querySelectorAll(".input-group input");
-  let operationOnInput = [];
+  let values = [];
 
-  //To extract values from the inputElements array
-  for(let i = 0; i < InputElements.length; i++) {
-    operationOnInput[i] = parseInt(InputElements[i].value);
-  }
-  
+  //To extract the values (use forEach or array.from())
+  values = Array.from(InputElements).map(function (InputElement) {
+    return parseInt(InputElement.value);
+  });
+
   let result = 0;
   let displayOutput = "";
 
-  for (let i = 0; i < operationOnInput.length; i++) {
+  values.forEach(function(item,index) {
+    displayOutput += `${values[index]}`;
 
-    displayOutput += `${operationOnInput[i]}`;
-
-    if (i < operationOnInput.length - 1)
+    if (index < values.length - 1)
       displayOutput += `${operationType[operation]}`;
+  })
 
-    switch(operation) {
-      case "add":
-        result += operationOnInput[i];
-        break
+  switch (operation) {
+    case "add":
+      result = values.reduce(function(accumulator, element){
+        return accumulator+element;
+      })
+      break;
 
-      case "subtract":
-        if(i == 0)
-          result = operationOnInput[i];
-        else
-          result -= operationOnInput[i];
-        break
+    case "subtract":
+      result = values.reduce(function(accumulator, element){
+        return accumulator-element;
+      })
+      break;
 
-      case "multiply":
-        if(i == 0)
-          result = 1;
-          result *= operationOnInput[i];
-        break;
-
-      case "divide":
-
-    }
+    case "multiply":
+      result = values.reduce(function(accumulator, element){
+        return accumulator*element;
+      })
+      break;
   }
   document.querySelector(".output").textContent = `${displayOutput} = ${result}`;
 }
 
-let n = 3;
-let lastInputTag = document.getElementById("add-button");
-lastInputTag.addEventListener("click", generateInputTag);
+let n = 2;
+const plusImageIcon = document.getElementById("add-button");
+plusImageIcon.addEventListener("click", generateInputTag);
 
 function generateInputTag() {
   const inputContainer = document.createElement("div");
   inputContainer.className = "input-group";
 
   const createdInputElement = document.createElement("input");
-  createdInputElement.setAttribute("placeholder", `input ${n}`);
-  createdInputElement.setAttribute("id",`input${n}`);
+  createdInputElement.setAttribute("placeholder", `input ${n+1}`);
+  createdInputElement.setAttribute("id", `input${n+1}`);
 
   const createLabel = document.createElement("label");
-  createLabel.setAttribute("for",`input${n}`);
+  createLabel.setAttribute("for", `input${n+1}`);
 
   inputContainer.appendChild(createdInputElement);
   inputContainer.appendChild(createLabel);
   n++;
 
   document.querySelector(".inputs").appendChild(inputContainer);
+
+  if(n > 2)
+    minusImageIcon.hidden = false;
 }
+
+
+const minusImageIcon = document.getElementById("remove-button");
+minusImageIcon.addEventListener("click", removeInputTag);
+
+function removeInputTag() {
+  document.querySelector(".input-group").remove();
+  n--;
+
+  if(n == 2)
+    minusImageIcon.hidden = true;
+}
+
 
