@@ -6,8 +6,19 @@ function main() {
   if (buttonElement) {
     buttonElement.addEventListener("click", selectOperator);
   }
-}
 
+  const plusImageIcon = document.getElementById("add-button");
+  plusImageIcon.addEventListener("click", generateInputTag);
+
+  const minusImageIcon = document.getElementById("remove-button");
+  minusImageIcon.addEventListener("click", removeInputTag);
+
+  main.elementReference = {
+    minusImageIcon,
+    minInputCount: 2,
+  };
+};
+  
 function selectOperator() {
   const selectedRadio = document.querySelector('input[name="operation"]:checked');
 
@@ -39,7 +50,7 @@ function performCalculation(operation) {
   let result = 0;
   let displayOutput = "";
 
-  values.forEach(function(item,index) {
+  values.forEach(function (item, index) {
     displayOutput += `${values[index]}`;
 
     if (index < values.length - 1)
@@ -48,61 +59,57 @@ function performCalculation(operation) {
 
   switch (operation) {
     case "add":
-      result = values.reduce(function(accumulator, element){
-        return accumulator+element;
-      })
+      result = values.reduce(function (accumulator, element) {
+        return accumulator + element;
+      }, 0);
       break;
 
     case "subtract":
-      result = values.reduce(function(accumulator, element){
-        return accumulator-element;
+      result = values.reduce(function (accumulator, element) {
+        return accumulator - element;
       })
       break;
 
     case "multiply":
-      result = values.reduce(function(accumulator, element){
-        return accumulator*element;
+      result = values.reduce(function (accumulator, element) {
+        return accumulator * element;
       })
       break;
   }
   document.querySelector(".output").textContent = `${displayOutput} = ${result}`;
 }
 
-let n = 2;
-const plusImageIcon = document.getElementById("add-button");
-plusImageIcon.addEventListener("click", generateInputTag);
-
 function generateInputTag() {
   const inputContainer = document.createElement("div");
   inputContainer.className = "input-group";
 
   const createdInputElement = document.createElement("input");
-  createdInputElement.setAttribute("placeholder", `input ${n+1}`);
-  createdInputElement.setAttribute("id", `input${n+1}`);
+  createdInputElement.setAttribute("placeholder", `input ${main.elementReference.minInputCount + 1}`);
+  createdInputElement.setAttribute("id", `input${main.minInputCount + 1}`);
 
   const createLabel = document.createElement("label");
-  createLabel.setAttribute("for", `input${n+1}`);
+  createLabel.setAttribute("for", `input${main.elementReference.minInputCount + 1}`);
 
   inputContainer.appendChild(createdInputElement);
   inputContainer.appendChild(createLabel);
-  n++;
+  main.elementReference.minInputCount++;
 
   document.querySelector(".inputs").appendChild(inputContainer);
 
-  if(n > 2)
-    minusImageIcon.hidden = false;
+  if (main.elementReference.minInputCount > 2) {
+    main.elementReference.minusImageIcon.hidden = false;
+  }
 }
 
-
-const minusImageIcon = document.getElementById("remove-button");
-minusImageIcon.addEventListener("click", removeInputTag);
-
 function removeInputTag() {
-  document.querySelector(".input-group").remove();
-  n--;
+  const inputGroups = document.querySelectorAll(".input-group");
+  inputGroups[inputGroups.length-1].remove();
+  main.elementReference.minInputCount--;
 
-  if(n == 2)
-    minusImageIcon.hidden = true;
+  if (main.elementReference.minInputCount == 2) {
+    // main.elementReference.minusImageIcon.hidden = true;
+    this.hidden = true;  //this points to the variable that triggers the event listener
+  }
 }
 
 
