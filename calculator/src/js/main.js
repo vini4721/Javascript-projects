@@ -8,7 +8,9 @@ function main() {
   }
 
   const plusImageIcon = document.getElementById("add-button");
-  plusImageIcon.addEventListener("click", generateInputTag);
+  plusImageIcon.addEventListener("click", function() {
+    generateInputTag();
+  });
 
   const minusImageIcon = document.getElementById("remove-button");
   minusImageIcon.addEventListener("click", removeInputTag);
@@ -20,15 +22,18 @@ function main() {
 };
   
 function selectOperator() {
-  const selectedRadio = document.querySelector('input[name="operation"]:checked');
+  // const selectedRadio = document.querySelector('input[name="operation"]:checked');
 
-  if (selectedRadio) {
-    const operation = selectedRadio.value;
-    performCalculation(operation);
-  }
-  else {
-    alert("No operation selected");
-  }
+  // if (selectedRadio) {
+  //   const operation = selectedRadio.value;
+  //   performCalculation(operation);
+  // }
+  // else {
+  //   alert("No operation selected");
+  // }
+
+  const selectOperation = document.querySelector('option[name = "operator"]:checked');
+  performCalculation(selectOperation.value);
 }
 
 function performCalculation(operation) {

@@ -39,7 +39,7 @@ body{
   bottom: 10px;
 }
 
-.options{
+/* .options{
   display: flex;
   flex-direction: column;
   padding: auto;
@@ -49,6 +49,10 @@ body{
 
 .options label{
   font-size: 20px;
+} */
+
+#operation{
+  margin: 50px 0px;
 }
 
 .button{
