@@ -7,6 +7,7 @@ body{
 
 .output-screen{
     height: 200px;
+
 }
 
 .output-screen span{
@@ -18,9 +19,14 @@ body{
     border-top: solid 2px rgb(101, 101, 101);
 }
 
+.buttons-container .row{
+    display: flex;
+    justify-content: space-around;
+}
+
 .buttons-container .row span{
     display: inline-flex;
-    border: solid 1px palevioletred;
+    border: solid 2px palevioletred;
     color: white;
     height: 50px;
     width: 50px;
@@ -28,5 +34,20 @@ body{
     justify-content: center;
     align-items: center;
     font-size: 25px;
-    margin: 10px;
+    margin: 10px 0;
+}
+
+.row5 :last-child{
+    border: none !important;
+    background-color: rgb(224, 93, 73) !important;
+}
+
+.row :last-child{
+    border: none !important;
+    background-color: rgba(129, 128, 128, 0.961);
+}
+
+.output-screen{
+    color: white;
+    font-size: 50px;
 }
