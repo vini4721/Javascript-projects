@@ -1,7 +1,5 @@
 document.addEventListener("DOMContentLoaded", main);
 
-// [2,+,2,*,10,*,2,*,10,/,2]  -> [2+200]
-
 function main() {
     main.equation = [];
     main.currentIndex = 0;
@@ -13,11 +11,25 @@ function main() {
     array.forEach(function (spanElemet) {
         spanElemet.addEventListener("click", calculate);
     })
+
+    document.addEventListener("keydown", OnKeyBind);
 }
 
-function calculate() {
+function OnKeyBind(event) {
+    const keyCodeObject = {
+        48: "0", 49: "1", 50: "2", 51: "3", 52: "4", 53: "5", 54: "6",
+        55: "7", 56: event.shiftKey ? "×" : "8", 57: "9",
+        187: event.shiftKey ? "+" : "=", 189: "-", 13: "=", 191: "÷", 8: "X",
+    };
 
-    const value = this.innerText;
+    if(event.keyCode in keyCodeObject) {
+        calculate(keyCodeObject[event.keyCode]);
+    }
+}
+
+function calculate(value) {
+    if(this)
+        value = this.innerText;
 
     if (value === "AC") {
         main.equation = [];
@@ -81,22 +93,4 @@ function calculate() {
     }
 
     document.querySelector(".equation").textContent = main.equation.join('');
-
-    // let value = this.innerText;
-
-    // let exp = main.display.replace(/×/g, '*').replace(/÷/g, '/');
-
-    // if (value === 'X') {
-    //     main.display = main.display.slice(0, -1);
-    // }
-    // else if (value === 'AC') {
-    //     main.display = "";
-    // }
-    // else if (value === '=') {
-    //     main.display = String(eval(exp));
-    // }
-    // else {
-    //     main.display += value;
-    // }
-    // document.querySelector(".equation").textContent = `${main.display}`;
 }
